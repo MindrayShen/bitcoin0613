@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class BlockController {
         blockListDto.setHeight(580678);
         blockListDto.setMiner("F2Pool");
         blockListDto.setSize(1143.45f);
-        blockListDto.setTime(new Date());
+        blockListDto.setTime(new Date().getTime());
         blockListDto.setTransactions((short) 2564);
         list.add(blockListDto);
 
@@ -35,7 +36,7 @@ public class BlockController {
         blockListDto2.setHeight(580673);
         blockListDto2.setMiner("ViaBTC");
         blockListDto2.setSize(1069.494f);
-        blockListDto2.setTime(new Date());
+        blockListDto2.setTime(new Date().getTime());
         blockListDto2.setTransactions((short) 2688);
         list.add(blockListDto2);
 
@@ -60,7 +61,7 @@ public class BlockController {
         blockGetDto.setOutputtotal(	1692.97928358f);
         blockGetDto.setPrevBlock("0000000000000000001d05f0e7621183f88c452401fb8d180ba49fdd75c5b44e");
         blockGetDto.setSize(1069.494f);
-        blockGetDto.setTime(new Date());
+        blockGetDto.setTime(new Date().getTime());
         blockGetDto.setTransactions((short) 2688);
         blockGetDto.setVersion("0x20000000");
         blockGetDto.setWeight(1f);
@@ -86,7 +87,7 @@ public class BlockController {
         blockGetDto.setOutputtotal(	1692.97928358f);
         blockGetDto.setPrevBlock("0000000000000000001d05f0e7621183f88c452401fb8d180ba49fdd75c5b44e");
         blockGetDto.setSize(1069.494f);
-        blockGetDto.setTime(new Date());
+        blockGetDto.setTime(new Date().getTime());
         blockGetDto.setTransactions((short) 2688);
         blockGetDto.setVersion("0x20000000");
         blockGetDto.setWeight(1f);

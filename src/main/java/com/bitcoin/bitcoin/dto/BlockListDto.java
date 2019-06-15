@@ -1,5 +1,6 @@
 package com.bitcoin.bitcoin.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BlockListDto {
@@ -8,7 +9,7 @@ public class BlockListDto {
 
     private Integer height;
 
-    private Date time;
+    private String time;
 
     private Short transactions;
 
@@ -32,12 +33,14 @@ public class BlockListDto {
         this.height = height;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setTime(Long time) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = simpleDateFormat.format(time);
+        this.time = format;
     }
 
     public Short getTransactions() {
