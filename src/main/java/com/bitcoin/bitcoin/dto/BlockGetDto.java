@@ -9,7 +9,7 @@ public class BlockGetDto {
 
     private Integer height;
 
-    private String time;
+    private Long time;
 
     private Short transactions;
 
@@ -57,14 +57,12 @@ public class BlockGetDto {
         this.height = height;
     }
 
-    public String getTime() {
+    public Long getTime() {
         return time;
     }
 
     public void setTime(Long time) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String format = simpleDateFormat.format(time);
-        this.time = format;
+        this.time = time;
     }
 
     public Short getTransactions() {
