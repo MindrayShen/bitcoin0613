@@ -12,7 +12,7 @@ response：
     {
         "blockhash": "000000000000000000051ce97582f22c3f24de4884eb5ee7ca98efd563879dba",
         "height": 580678,
-        "time": "2019-06-15 09:27:49",
+        "time": "1560566903190",
         "transactions": 2564,
         "miner": "F2Pool",
         "size": 1143.45
@@ -20,7 +20,7 @@ response：
     {
         "blockhash": "00000000000000000011903ce43dad868af043ca2f967016b4a2ba16e5311e53",
         "height": 580673,
-        "time": "2019-06-15 09:27:49",
+        "time": "1560566903190",
         "transactions": 2688,
         "miner": "ViaBTC",
         "size": 1069.494
@@ -42,7 +42,7 @@ response：
 
 
 
-url:http://localhost:8080/block/getByBlockhash?blockhash={blockhash}
+url:/block/getByBlockhash?blockhash={blockhash}
 
 method：GET
 
@@ -51,7 +51,7 @@ response：
 {
     "blockhash": "00000000000000000011903ce43dad868af043ca2f967016b4a2ba16e5311e53",
     "height": 580673,
-    "time": "2019-06-15 09:27:51",
+    "time": "1560566903190",
     "transactions": 2688,
     "miner": "ViaBTC",
     "size": 1069.494,
@@ -97,7 +97,7 @@ response：
 
 
 
-url:http://localhost:8080/block/getByBlockhash?blockheight={blockheight}
+url:/block/getByBlockhash?blockheight={blockheight}
 
 method：GET
 
@@ -106,7 +106,7 @@ response：
 {
     "blockhash": "00000000000000000011903ce43dad868af043ca2f967016b4a2ba16e5311e53",
     "height": 580673,
-    "time": "2019-06-15 09:27:51",
+    "time": "1560566903190",
     "transactions": 2688,
     "miner": "ViaBTC",
     "size": 1069.494,
