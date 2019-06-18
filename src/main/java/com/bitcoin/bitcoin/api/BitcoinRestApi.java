@@ -19,6 +19,9 @@ public interface BitcoinRestApi {
     //PathVariable  如果后面不填  默认是参数名  对接 {}      地址参数{}接收   但是我这里不行  必须加上名字
     JSONObject getBlockNoTxDetail(@PathVariable("blockhash") String blockhash);
 
+    @GetMapping("/rest/block/{blockhash}.json")
+    JSONObject getBlock(@PathVariable("blockhash") String blockhash);
+
     //可以用JSONArray    也可以用List<JSONObject>    list相对于返回web数据更好用
     @GetMapping("/rest/headers/{count}/{blockhash}.json")
     List<JSONObject> getBlockHeaders(@PathVariable("count") Integer count, @PathVariable("blockhash") String blockhash);

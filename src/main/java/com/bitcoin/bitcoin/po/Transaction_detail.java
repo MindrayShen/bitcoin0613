@@ -1,6 +1,6 @@
 package com.bitcoin.bitcoin.po;
 
-public class transaction_detail {
+public class Transaction_detail {
     private Long txDetailId;
 
     private String address;

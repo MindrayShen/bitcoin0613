@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bitcoin.bitcoin.dao.transactionMapper">
-  <resultMap id="BaseResultMap" type="com.bitcoin.bitcoin.po.transaction">
+<mapper namespace="com.bitcoin.bitcoin.dao.TransactionMapper">
+  <resultMap id="BaseResultMap" type="com.bitcoin.bitcoin.po.Transaction">
     <id column="txhash" jdbcType="CHAR" property="txhash" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="amount" jdbcType="REAL" property="amount" />
@@ -32,7 +32,7 @@
     delete from transaction
     where txhash = #{txhash,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.bitcoin.bitcoin.po.transaction">
+  <insert id="insert" parameterType="com.bitcoin.bitcoin.po.Transaction">
     insert into transaction (txhash, time, amount, 
       feeperbyte, feeperweight, fees, 
       weight, totaloutput, totalinput, 
@@ -46,7 +46,7 @@
       #{estimated,jdbcType=VARCHAR}, #{blockhash,jdbcType=CHAR}, #{scripts,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.bitcoin.bitcoin.po.transaction">
+  <insert id="insertSelective" parameterType="com.bitcoin.bitcoin.po.Transaction">
     insert into transaction
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="txhash != null">
@@ -143,7 +143,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bitcoin.bitcoin.po.transaction">
+  <update id="updateByPrimaryKeySelective" parameterType="com.bitcoin.bitcoin.po.Transaction">
     update transaction
     <set>
       <if test="time != null">
@@ -191,7 +191,7 @@
     </set>
     where txhash = #{txhash,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bitcoin.bitcoin.po.transaction">
+  <update id="updateByPrimaryKey" parameterType="com.bitcoin.bitcoin.po.Transaction">
     update transaction
     set time = #{time,jdbcType=TIMESTAMP},
       amount = #{amount,jdbcType=REAL},

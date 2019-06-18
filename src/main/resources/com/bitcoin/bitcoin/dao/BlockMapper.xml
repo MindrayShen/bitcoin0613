@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bitcoin.bitcoin.dao.blockMapper">
-  <resultMap id="BaseResultMap" type="com.bitcoin.bitcoin.po.block">
+<mapper namespace="com.bitcoin.bitcoin.dao.BlockMapper">
+  <resultMap id="BaseResultMap" type="com.bitcoin.bitcoin.po.Block">
     <id column="blockhash" jdbcType="CHAR" property="blockhash" />
     <result column="height" jdbcType="INTEGER" property="height" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
@@ -14,7 +14,7 @@
     <result column="fees" jdbcType="REAL" property="fees" />
     <result column="difficulty" jdbcType="DOUBLE" property="difficulty" />
     <result column="weight" jdbcType="REAL" property="weight" />
-    <result column="bits" jdbcType="REAL" property="bits" />
+    <result column="bits" jdbcType="VARCHAR" property="bits" />
     <result column="version" jdbcType="VARCHAR" property="version" />
     <result column="nonce" jdbcType="INTEGER" property="nonce" />
     <result column="next_block" jdbcType="CHAR" property="nextBlock" />
@@ -35,7 +35,7 @@
     delete from block
     where blockhash = #{blockhash,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.bitcoin.bitcoin.po.block">
+  <insert id="insert" parameterType="com.bitcoin.bitcoin.po.Block">
     insert into block (blockhash, height, time, 
       transactions, miner, size, 
       outputtotal, merkleroot, estimated, 
@@ -47,11 +47,11 @@
       #{transactions,jdbcType=SMALLINT}, #{miner,jdbcType=VARCHAR}, #{size,jdbcType=REAL}, 
       #{outputtotal,jdbcType=REAL}, #{merkleroot,jdbcType=CHAR}, #{estimated,jdbcType=REAL}, 
       #{fees,jdbcType=REAL}, #{difficulty,jdbcType=DOUBLE}, #{weight,jdbcType=REAL}, 
-      #{bits,jdbcType=REAL}, #{version,jdbcType=VARCHAR}, #{nonce,jdbcType=INTEGER}, 
+      #{bits,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{nonce,jdbcType=INTEGER}, 
       #{nextBlock,jdbcType=CHAR}, #{prevBlock,jdbcType=CHAR}, #{blockreward,jdbcType=REAL}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.bitcoin.bitcoin.po.block">
+  <insert id="insertSelective" parameterType="com.bitcoin.bitcoin.po.Block">
     insert into block
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="blockhash != null">
@@ -147,7 +147,7 @@
         #{weight,jdbcType=REAL},
       </if>
       <if test="bits != null">
-        #{bits,jdbcType=REAL},
+        #{bits,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         #{version,jdbcType=VARCHAR},
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bitcoin.bitcoin.po.block">
+  <update id="updateByPrimaryKeySelective" parameterType="com.bitcoin.bitcoin.po.Block">
     update block
     <set>
       <if test="height != null">
@@ -203,7 +203,7 @@
         weight = #{weight,jdbcType=REAL},
       </if>
       <if test="bits != null">
-        bits = #{bits,jdbcType=REAL},
+        bits = #{bits,jdbcType=VARCHAR},
       </if>
       <if test="version != null">
         version = #{version,jdbcType=VARCHAR},
@@ -223,7 +223,7 @@
     </set>
     where blockhash = #{blockhash,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bitcoin.bitcoin.po.block">
+  <update id="updateByPrimaryKey" parameterType="com.bitcoin.bitcoin.po.Block">
     update block
     set height = #{height,jdbcType=INTEGER},
       time = #{time,jdbcType=TIMESTAMP},
@@ -236,7 +236,7 @@
       fees = #{fees,jdbcType=REAL},
       difficulty = #{difficulty,jdbcType=DOUBLE},
       weight = #{weight,jdbcType=REAL},
-      bits = #{bits,jdbcType=REAL},
+      bits = #{bits,jdbcType=VARCHAR},
       version = #{version,jdbcType=VARCHAR},
       nonce = #{nonce,jdbcType=INTEGER},
       next_block = #{nextBlock,jdbcType=CHAR},

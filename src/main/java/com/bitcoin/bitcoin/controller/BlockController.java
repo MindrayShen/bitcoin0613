@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bitcoin.bitcoin.api.BitcoinJsonRpcApi;
 import com.bitcoin.bitcoin.api.BitcoinRestApi;
+import com.bitcoin.bitcoin.dao.BlockMapper;
 import com.bitcoin.bitcoin.dto.BlockGetDto;
 import com.bitcoin.bitcoin.dto.BlockListDto;
+import com.bitcoin.bitcoin.service.BitcoinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +31,12 @@ public class BlockController {
     @Autowired
     private BitcoinJsonRpcApi bitcoinJsonRpcApi;
 
+    @Autowired
+    private BlockMapper blockMapper;
+
+    @Autowired
+    private BitcoinService bitcoinService;
+
     @GetMapping("/getrecentblocks")
     public List<BlockListDto> getrecentblocks() throws Throwable {
 
@@ -51,26 +59,32 @@ public class BlockController {
 //        blockListDto2.setTransactions((short) 2688);
 //        list.add(blockListDto2);
 
-        JSONObject blockChainInfo = bitcoinRestApi.getBlockChainInfo();
-        Integer blocks = blockChainInfo.getInteger("blocks");
-        blocks-=5;
-        String hashByHeight = bitcoinJsonRpcApi.getHashByHeight(blocks);
+        //上面是死数据   下面是实时数据
 
-        List<JSONObject> blockHeaders = bitcoinRestApi.getBlockHeaders(5, hashByHeight);
-        for (JSONObject blockheader:blockHeaders
-             ) {
-            BlockListDto blockListDto = new BlockListDto();
-            blockListDto.setBlockhash(blockheader.getString("hash"));
-            blockListDto.setTransactions(null);
-            //todo size
-            blockListDto.setSize(blockheader.getFloat("nTx"));
-            blockListDto.setMiner(null);
-            blockListDto.setHeight(blockheader.getInteger("height"));
+//        JSONObject blockChainInfo = bitcoinRestApi.getBlockChainInfo();
+//        Integer blocks = blockChainInfo.getInteger("blocks");
+//        blocks-=5;
+//        String hashByHeight = bitcoinJsonRpcApi.getHashByHeight(blocks);
+//
+//        List<JSONObject> blockHeaders = bitcoinRestApi.getBlockHeaders(5, hashByHeight);
+//        for (JSONObject blockheader:blockHeaders
+//             ) {
+//            BlockListDto blockListDto = new BlockListDto();
+//            blockListDto.setBlockhash(blockheader.getString("hash"));
+//            blockListDto.setTransactions(null);
+//            //todo size
+//            blockListDto.setSize(blockheader.getFloat("nTx"));
+//            blockListDto.setMiner(null);
+//            blockListDto.setHeight(blockheader.getInteger("height"));
+//
+//            blockListDto.setTime(null);
+//
+//            list.add(blockListDto);
+//        }
 
-            blockListDto.setTime(null);
-
-            list.add(blockListDto);
-        }
+        //下面是同步数据库的
+        String blockhash="000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943";
+        bitcoinService.synBlock(blockhash);
 
 
         return list;

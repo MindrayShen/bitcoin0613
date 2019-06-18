@@ -2,7 +2,7 @@ package com.bitcoin.bitcoin.po;
 
 import java.util.Date;
 
-public class block {
+public class Block {
     private String blockhash;
 
     private Integer height;
@@ -27,7 +27,7 @@ public class block {
 
     private Float weight;
 
-    private Float bits;
+    private String bits;
 
     private String version;
 
@@ -135,12 +135,12 @@ public class block {
         this.weight = weight;
     }
 
-    public Float getBits() {
+    public String getBits() {
         return bits;
     }
 
-    public void setBits(Float bits) {
-        this.bits = bits;
+    public void setBits(String bits) {
+        this.bits = bits == null ? null : bits.trim();
     }
 
     public String getVersion() {

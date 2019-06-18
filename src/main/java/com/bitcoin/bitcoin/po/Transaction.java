@@ -2,7 +2,7 @@ package com.bitcoin.bitcoin.po;
 
 import java.util.Date;
 
-public class transaction {
+public class Transaction {
     private String txhash;
 
     private Date time;
