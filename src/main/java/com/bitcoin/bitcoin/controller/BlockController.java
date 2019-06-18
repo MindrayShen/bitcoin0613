@@ -1,7 +1,9 @@
 package com.bitcoin.bitcoin.controller;
 
+import com.bitcoin.bitcoin.api.BitcoinRestApi;
 import com.bitcoin.bitcoin.dto.BlockGetDto;
 import com.bitcoin.bitcoin.dto.BlockListDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,9 @@ import java.util.List;
 @RequestMapping("/block")
 public class BlockController {
 
+
+    @Autowired
+    private BitcoinRestApi bitcoinRestApi;
 
     @GetMapping("/getrecentblocks")
     public List<BlockListDto> getrecentblocks(){

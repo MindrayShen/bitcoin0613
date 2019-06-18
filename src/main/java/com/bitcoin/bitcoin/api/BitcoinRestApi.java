@@ -32,4 +32,10 @@ public interface BitcoinRestApi {
     @GetMapping("/rest/mempool/contents.json")
     JSONObject getMemPoolContents();
 
+    @GetMapping("/rest/getutxos/{txhash}-{n}.json")
+    JSONObject getUTXO(@PathVariable("txhash") String txhash,@PathVariable("n") Integer n);
+
+    @GetMapping("/rest/getutxos/checkmempool/{txhash}-{n}.json")
+    JSONObject getUTXOMempool(@PathVariable("txhash") String txhash,@PathVariable("n") Integer n);
+
 }
