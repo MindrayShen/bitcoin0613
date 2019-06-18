@@ -6,6 +6,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @FeignClient(name = "BitcoinRestApi",url = "http://localhost:18332")
 public interface BitcoinRestApi {
 
@@ -17,8 +19,9 @@ public interface BitcoinRestApi {
     //PathVariable  如果后面不填  默认是参数名  对接 {}      地址参数{}接收   但是我这里不行  必须加上名字
     JSONObject getBlockNoTxDetail(@PathVariable("blockhash") String blockhash);
 
+    //可以用JSONArray    也可以用List<JSONObject>    list相对于返回web数据更好用
     @GetMapping("/rest/headers/{count}/{blockhash}.json")
-    JSONArray getBlockHeaders(@PathVariable("count") Integer count, @PathVariable("blockhash") String blockhash);
+    List<JSONObject> getBlockHeaders(@PathVariable("count") Integer count, @PathVariable("blockhash") String blockhash);
 
     @GetMapping("/rest/tx/{txhash}.json")
     JSONObject getTxByHashJson(@PathVariable("txhash") String txhash);

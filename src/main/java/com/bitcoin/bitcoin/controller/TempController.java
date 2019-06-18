@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URL;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/temp")
@@ -27,14 +28,14 @@ public class TempController {
 
 //        JSONObject blockChainInfo = bitcoinRestApi.getBlockChainInfo();
 //        JSONObject blockNoTxDetail = bitcoinRestApi.getBlockNoTxDetail("000000000000033ba3b0104d1c4f662f789caa7634670c49677aaa91f9ecb9a3");
-        JSONArray blockHeaders = bitcoinRestApi.getBlockHeaders(5, "000000000000033ba3b0104d1c4f662f789caa7634670c49677aaa91f9ecb9a3");
+        List<JSONObject> blockHeaders = bitcoinRestApi.getBlockHeaders(5, "000000000000033ba3b0104d1c4f662f789caa7634670c49677aaa91f9ecb9a3");
 //        JSONObject txByHashJson = bitcoinRestApi.getTxByHashJson("48890e18fa956ed43d43c22297d159359bb446a3a45d63e668607f89a0dbbb99");
 //        JSONObject hashByHeight = bitcoinRestApi.getHashByHeight(1543827);
 //        JSONObject memPool = bitcoinRestApi.getMemPool();
 //        JSONObject memPoolContents = bitcoinRestApi.getMemPoolContents();
         JSONObject utxo = bitcoinRestApi.getUTXO("537969f30ac81f0a0774c2835f290ede087c950083e1a93b481fc54e2c52eddb", 1);
         JSONObject utxoMempool = bitcoinRestApi.getUTXOMempool("537969f30ac81f0a0774c2835f290ede087c950083e1a93b481fc54e2c52eddb", 1);
-        return blockHeaders.toJSONString();
+        return blockHeaders.toString();
 
     }
 
