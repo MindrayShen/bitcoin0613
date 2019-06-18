@@ -1,17 +1,17 @@
 package com.bitcoin.bitcoin.dao;
 
-import com.bitcoin.bitcoin.po.transaction;
+import com.bitcoin.bitcoin.po.Transaction;
 
-public interface transactionMapper {
+public interface TransactionMapper {
     int deleteByPrimaryKey(String txhash);
 
-    int insert(transaction record);
+    int insert(Transaction record);
 
-    int insertSelective(transaction record);
+    int insertSelective(Transaction record);
 
-    transaction selectByPrimaryKey(String txhash);
+    Transaction selectByPrimaryKey(String txhash);
 
-    int updateByPrimaryKeySelective(transaction record);
+    int updateByPrimaryKeySelective(Transaction record);
 
-    int updateByPrimaryKey(transaction record);
+    int updateByPrimaryKey(Transaction record);
 }

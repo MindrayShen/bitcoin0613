@@ -1,17 +1,22 @@
 package com.bitcoin.bitcoin.dao;
 
-import com.bitcoin.bitcoin.po.block;
+import com.bitcoin.bitcoin.po.Block;
 
-public interface blockMapper {
+import java.util.List;
+
+public interface BlockMapper {
     int deleteByPrimaryKey(String blockhash);
 
-    int insert(block record);
+    int insert(Block record);
 
-    int insertSelective(block record);
+    int insertSelective(Block record);
 
-    block selectByPrimaryKey(String blockhash);
+    Block selectByPrimaryKey(String blockhash);
 
-    int updateByPrimaryKeySelective(block record);
+    int updateByPrimaryKeySelective(Block record);
 
-    int updateByPrimaryKey(block record);
+    int updateByPrimaryKey(Block record);
+
+    //SELECT *
+    List<Block> selectRecentBlock();
 }

@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.bitcoin.bitcoin.api.BitcoinJsonRpcApi;
 import com.bitcoin.bitcoin.api.BitcoinRestApi;
+import com.bitcoin.bitcoin.dto.BlockListDto;
+import com.bitcoin.bitcoin.service.BlockService;
 import com.googlecode.jsonrpc4j.JsonRpcHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +21,17 @@ import java.util.List;
 @RequestMapping("/temp")
 public class TempController {
 
+    /**
+     *
+     */
     @Autowired
     private BitcoinRestApi bitcoinRestApi;
 
+    @Autowired
+    private BitcoinJsonRpcApi bitcoinJsonRpcApi;
+
+    @Autowired
+    private BlockService blockService;
 
     @GetMapping("/test")
     public String test() {
@@ -39,10 +49,9 @@ public class TempController {
 
     }
 
-    @Autowired
-    private BitcoinJsonRpcApi bitcoinJsonRpcApi;
 
-    @GetMapping("test1")
+
+    @GetMapping("/test1")
     public String test1() throws Throwable {
 
 //        HashMap<String,String> headers = new HashMap<>();
@@ -66,4 +75,10 @@ public class TempController {
         return null;
     }
 
+    @GetMapping("/test2")
+    public List<BlockListDto> test2(){
+        List<BlockListDto> recentBlocks = blockService.getRecentBlocks();
+        return recentBlocks;
+    }
 }
+

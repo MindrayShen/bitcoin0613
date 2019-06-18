@@ -1,17 +1,17 @@
 package com.bitcoin.bitcoin.dao;
 
-import com.bitcoin.bitcoin.po.transaction_detail;
+import com.bitcoin.bitcoin.po.Transaction_detail;
 
-public interface transaction_detailMapper {
+public interface Transaction_detailMapper {
     int deleteByPrimaryKey(Long txDetailId);
 
-    int insert(transaction_detail record);
+    int insert(Transaction_detail record);
 
-    int insertSelective(transaction_detail record);
+    int insertSelective(Transaction_detail record);
 
-    transaction_detail selectByPrimaryKey(Long txDetailId);
+    Transaction_detail selectByPrimaryKey(Long txDetailId);
 
-    int updateByPrimaryKeySelective(transaction_detail record);
+    int updateByPrimaryKeySelective(Transaction_detail record);
 
-    int updateByPrimaryKey(transaction_detail record);
+    int updateByPrimaryKey(Transaction_detail record);
 }
