@@ -1,5 +1,8 @@
 package com.bitcoin.bitcoin.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.bitcoin.bitcoin.api.BitcoinJsonRpcApi;
 import com.bitcoin.bitcoin.api.BitcoinRestApi;
 import com.bitcoin.bitcoin.dto.BlockGetDto;
 import com.bitcoin.bitcoin.dto.BlockListDto;
@@ -23,27 +26,52 @@ public class BlockController {
     @Autowired
     private BitcoinRestApi bitcoinRestApi;
 
+    @Autowired
+    private BitcoinJsonRpcApi bitcoinJsonRpcApi;
+
     @GetMapping("/getrecentblocks")
-    public List<BlockListDto> getrecentblocks(){
+    public List<BlockListDto> getrecentblocks() throws Throwable {
 
         ArrayList<BlockListDto> list = new ArrayList<>();
-        BlockListDto blockListDto = new BlockListDto();
-        blockListDto.setBlockhash("000000000000000000051ce97582f22c3f24de4884eb5ee7ca98efd563879dba");
-        blockListDto.setHeight(580678);
-        blockListDto.setMiner("F2Pool");
-        blockListDto.setSize(1143.45f);
-        blockListDto.setTime(new Date().getTime());
-        blockListDto.setTransactions((short) 2564);
-        list.add(blockListDto);
+//        BlockListDto blockListDto = new BlockListDto();
+//        blockListDto.setBlockhash("000000000000000000051ce97582f22c3f24de4884eb5ee7ca98efd563879dba");
+//        blockListDto.setHeight(580678);
+//        blockListDto.setMiner("F2Pool");
+//        blockListDto.setSize(1143.45f);
+//        blockListDto.setTime(new Date().getTime());
+//        blockListDto.setTransactions((short) 2564);
+//        list.add(blockListDto);
+//
+//        BlockListDto blockListDto2 = new BlockListDto();
+//        blockListDto2.setBlockhash("00000000000000000011903ce43dad868af043ca2f967016b4a2ba16e5311e53");
+//        blockListDto2.setHeight(580673);
+//        blockListDto2.setMiner("ViaBTC");
+//        blockListDto2.setSize(1069.494f);
+//        blockListDto2.setTime(new Date().getTime());
+//        blockListDto2.setTransactions((short) 2688);
+//        list.add(blockListDto2);
 
-        BlockListDto blockListDto2 = new BlockListDto();
-        blockListDto2.setBlockhash("00000000000000000011903ce43dad868af043ca2f967016b4a2ba16e5311e53");
-        blockListDto2.setHeight(580673);
-        blockListDto2.setMiner("ViaBTC");
-        blockListDto2.setSize(1069.494f);
-        blockListDto2.setTime(new Date().getTime());
-        blockListDto2.setTransactions((short) 2688);
-        list.add(blockListDto2);
+        JSONObject blockChainInfo = bitcoinRestApi.getBlockChainInfo();
+        Integer blocks = blockChainInfo.getInteger("blocks");
+        blocks-=5;
+        String hashByHeight = bitcoinJsonRpcApi.getHashByHeight(blocks);
+
+        List<JSONObject> blockHeaders = bitcoinRestApi.getBlockHeaders(5, hashByHeight);
+        for (JSONObject blockheader:blockHeaders
+             ) {
+            BlockListDto blockListDto = new BlockListDto();
+            blockListDto.setBlockhash(blockheader.getString("hash"));
+            blockListDto.setTransactions(null);
+            //todo size
+            blockListDto.setSize(blockheader.getFloat("nTx"));
+            blockListDto.setMiner(null);
+            blockListDto.setHeight(blockheader.getInteger("height"));
+
+            blockListDto.setTime(null);
+
+            list.add(blockListDto);
+        }
+
 
         return list;
     }
